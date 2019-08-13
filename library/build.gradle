@@ -53,7 +53,7 @@ publish {
   userOrg = 'keep2iron'
   groupId = 'io.github.keep2iron'
   artifactId = 'rx-result'
-  publishVersion = '0.0.1'
+  publishVersion = '0.0.2'
   desc = ''
   website = 'https://keep2iron.github.io'
 }

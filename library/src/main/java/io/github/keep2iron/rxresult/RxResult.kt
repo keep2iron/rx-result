@@ -50,74 +50,78 @@ class RxResult private constructor() {
     })
   }
 
+  fun prepare(intent: Intent, vararg args: Pair<String, Any>): RxResult {
+    for (arg in args) {
+      when (val value = arg.second) {
+        is String -> {
+          intent.putExtra(arg.first, value)
+        }
+        is Int -> {
+          intent.putExtra(arg.first, value)
+        }
+        is Double -> {
+          intent.putExtra(arg.first, value)
+        }
+        is Float -> {
+          intent.putExtra(arg.first, value)
+        }
+        is Byte -> {
+          intent.putExtra(arg.first, value)
+        }
+        is Boolean -> {
+          intent.putExtra(arg.first, value)
+        }
+        is Bundle -> {
+          intent.putExtra(arg.first, value)
+        }
+        is Long -> {
+          intent.putExtra(arg.first, value)
+        }
+        is Char -> {
+          intent.putExtra(arg.first, value)
+        }
+        is Short -> {
+          intent.putExtra(arg.first, value)
+        }
+        is Parcelable -> {
+          intent.putExtra(arg.first, value)
+        }
+        is IntArray -> {
+          intent.putExtra(arg.first, value)
+        }
+        is ByteArray -> {
+          intent.putExtra(arg.first, value)
+        }
+        is FloatArray -> {
+          intent.putExtra(arg.first, value)
+        }
+        is DoubleArray -> {
+          intent.putExtra(arg.first, value)
+        }
+        is BooleanArray -> {
+          intent.putExtra(arg.first, value)
+        }
+        is Serializable -> {
+          intent.putExtra(arg.first, value)
+        }
+        is LongArray -> {
+          intent.putExtra(arg.first, value)
+        }
+        is CharSequence -> {
+          intent.putExtra(arg.first, value)
+        }
+      }
+    }
+    this.intent = intent
+
+    return this
+  }
+
   inline fun <reified T : Activity> prepare(
     vararg args: Pair<String, Any>
   ): RxResult {
     checkNotNull(context)
-    intent = Intent(context, T::class.java).also { intent ->
-      for (arg in args) {
-        when (val value = arg.second) {
-          is String -> {
-            intent.putExtra(arg.first, value)
-          }
-          is Int -> {
-            intent.putExtra(arg.first, value)
-          }
-          is Double -> {
-            intent.putExtra(arg.first, value)
-          }
-          is Float -> {
-            intent.putExtra(arg.first, value)
-          }
-          is Byte -> {
-            intent.putExtra(arg.first, value)
-          }
-          is Boolean -> {
-            intent.putExtra(arg.first, value)
-          }
-          is Bundle -> {
-            intent.putExtra(arg.first, value)
-          }
-          is Long -> {
-            intent.putExtra(arg.first, value)
-          }
-          is Char -> {
-            intent.putExtra(arg.first, value)
-          }
-          is Short -> {
-            intent.putExtra(arg.first, value)
-          }
-          is Parcelable -> {
-            intent.putExtra(arg.first, value)
-          }
-          is IntArray -> {
-            intent.putExtra(arg.first, value)
-          }
-          is ByteArray -> {
-            intent.putExtra(arg.first, value)
-          }
-          is FloatArray -> {
-            intent.putExtra(arg.first, value)
-          }
-          is DoubleArray -> {
-            intent.putExtra(arg.first, value)
-          }
-          is BooleanArray -> {
-            intent.putExtra(arg.first, value)
-          }
-          is Serializable -> {
-            intent.putExtra(arg.first, value)
-          }
-          is LongArray -> {
-            intent.putExtra(arg.first, value)
-          }
-          is CharSequence -> {
-            intent.putExtra(arg.first, value)
-          }
-        }
-      }
-    }
-    return this
+    return prepare(Intent(context, T::class.java), *args)
   }
 
   fun requestForResult(requestCode: Int = 0x1024): Observable<Result> {
