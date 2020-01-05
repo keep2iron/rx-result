@@ -27,7 +27,12 @@ class MainFragment : Fragment() {
     super.onViewCreated(view, savedInstanceState)
     button1.setOnClickListener {
       RxResult(this)
-        .prepare<TargetActivity>()
+        .prepare<TargetActivity>(
+          "argInt" to 1,
+          "argFloat" to 1f,
+          "argDouble" to 1.0,
+          "argString" to "1"
+          )
         .requestForResult()
         .filter { it.result }
         .subscribe {
