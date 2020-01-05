@@ -19,7 +19,7 @@ class RxResultFragment : Fragment() {
 
   private val subjects = HashMap<String, PublishSubject<Result>>()
 
-  override fun onAttach(context: Context?) {
+  override fun onAttach(context: Context) {
     super.onAttach(context)
     if (!didStart()) {
       startActivityForResult(getLaunchIntent(), requestCode())
